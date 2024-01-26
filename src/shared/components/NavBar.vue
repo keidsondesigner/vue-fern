@@ -4,28 +4,31 @@ import type { RouterLink } from "@/router/list-routes";
 interface Props  {
   title?: string;
   links: RouterLink[];
+  navSecondary?: boolean;
 };
 
 // defineProps<Props>()
 withDefaults(
   defineProps<Props>(), {
-    title: "Valor padrão"
+    title: "Valor padrão",
+    navSecondary: false
   }
 
 );
-
 </script>
 
 <template>
   <nav>
-    <div class="logo">
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="25" height="25" />
-      <span 
-        v-if="$props.title"
-      >
-        {{ $props.title }}
-      </span>
-    </div>
+    <template v-if="!$props.navSecondary">
+      <div class="logo">
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="25" height="25" />
+        <span 
+          v-if="$props.title"
+        >
+          {{ $props.title }}
+        </span>
+      </div>
+    </template>
     <div class="links">
       <RouterLink
         v-for="link of $props.links"

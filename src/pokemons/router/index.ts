@@ -10,14 +10,21 @@ export const pokemonRoute: RouteRecordRaw = {
   children: [
     {
       path: `/${ROUTE_NAME}/by/:id`,
+      // title n existe dentro do "RouteRecordRaw" por isso passado no Propos
+      props: { title: 'Pókemon por Id' },
+      name: 'pokemon-id',
       component: () => import('@/pokemons/views/PokemonById.vue'),
     },
     {
       path: `/${ROUTE_NAME}/list`,
+      props: { title: 'Lista Pókemons' },
+      name: 'pokemon-list',
       component: () => import('@/pokemons/views/PokemonList.vue'),
     },
     {
       path: `/${ROUTE_NAME}/search`,
+      props: { title: 'Pesquisar Pókemon' },
+      name: 'pokemon-search',
       component: () => import('@/pokemons/views/PokemonSearch.vue'),
     }
   ]
