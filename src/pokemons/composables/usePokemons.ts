@@ -1,32 +1,25 @@
-import { computed, onMounted, ref } from "vue";
-
+import { computed } from "vue";
+import { useQuery } from "@tanstack/vue-query";
 import { getPokemons } from "../helpers/get-pokemon";
-import type { Pokemon } from "../interfaces";
-
-const pokemons = ref<Pokemon[]>([]);
-const isLoading = ref(true);
 
 
 export const usePokemons = () => {
 
-  onMounted(async () => {
-    const data = await getPokemons();
-    pokemons.value = data;
-    isLoading.value = false;
-  });
 
-  // if (pokemons.value.length === 0) {
-  //   getPokemons()
-  //     .then((data) => {
-  //       pokemons.value = data;
-  //       isLoading.value = false;
-  //     });
-  // };
+  const { isLoading, data: pokemons, isError, error } = useQuery({
+    queryKey: ['pokemons'],
+    queryFn: getPokemons,
+  });
+    
 
   return {
+    // Properties
     pokemons,
     isLoading,
+    isError,
+    error,
 
-    count: computed(() => pokemons.value.length),
+    // Computed
+    count: computed(() => pokemons.value?.length ?? 0 ),
   }
 }
