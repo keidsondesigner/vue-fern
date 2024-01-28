@@ -15,13 +15,24 @@ const routeLinks: RouterLink[] = pokemonRoute.children?.map((link) => {
 
 </script>
 <template>
-  <NavBar  
-    nav-secondary
-    :links="routeLinks"
-  />
   <div>
+    <NavBar  
+      nav-secondary
+      :links="routeLinks"
+    />
     <!-- <h1>Pokemon Layout</h1> -->
-    <RouterView />
+    <div>
+      <Suspense>
+        <template #default>
+          <RouterView />
+        </template>
+        <template #fallback>
+          <div>
+            Loading...
+          </div>
+        </template>
+      </Suspense>
+    </div>
   </div>
 </template>
 <style scoped>
