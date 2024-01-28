@@ -2,9 +2,12 @@ import axios from 'axios';
 import pokemonApi from '../api/pokemonApi';
 
 import type { Pokemon, PokemonListResponse, PokemonResponse } from "../interfaces";
+//import { sleep } from './sleep';
 
 // Filtrando "data" que é o retorno da API, para retornar apenas os dados do tipo "pokemon";
 export const getPokemons = async(): Promise<Pokemon[]> => {
+
+  //await sleep(3); // função de TEST, atrasando a chamanda a API;
 
   const { data } = await pokemonApi.get<PokemonListResponse>('/pokemon?limit=45');
 
