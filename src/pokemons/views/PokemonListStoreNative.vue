@@ -1,14 +1,21 @@
 <script setup lang="ts">
+import { useQuery } from '@tanstack/vue-query';
+import { getPokemons } from '@/pokemons/helpers/get-pokemon';
+
 import store from '@/store/pokemon.store';
 import PokemonCardList from '../components/PokemonCardLits.vue';
 
 // Removendo Composable function usePokemons()
 // const { count, pokemons, isLoading, isError, error } = usePokemons();
+// e implentando Store no lugar de Composable function usePokemons()
 
-// implentando Store no lugar de Composable function usePokemons()
-
-// Disparando o método startLoadingPokemons() que lista os pokemons;
-store.startLoadingPokemons();
+useQuery({
+  queryKey: ['pokemons'],
+  queryFn: getPokemons,
+  select(data) {
+    store.loadedPokemons(data);
+  },
+});
 
 </script>
 
