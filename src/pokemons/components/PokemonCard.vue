@@ -5,9 +5,7 @@ interface Props {
   pokemon: Pokemon;
 }
 
-
 defineProps<Props>();
-
 
 </script>
 

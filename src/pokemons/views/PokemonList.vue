@@ -4,7 +4,6 @@ import { usePokemons } from '../composables/usePokemons';
 
 const { count, pokemons, isLoading, isError, error } = usePokemons();
 
-
 </script>
 
 <template>
@@ -14,15 +13,14 @@ const { count, pokemons, isLoading, isError, error } = usePokemons();
     {{ error }}
   </div>
 
-
   <div v-else>
     <h1>Pokemon List - ({{ count }})</h1>
     
     <PokemonCardList 
       :pokemons="pokemons ?? []"
     />
-
   </div>
+
 </template>
 
 <style scoped>

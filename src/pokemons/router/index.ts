@@ -10,7 +10,7 @@ export const pokemonRoute: RouteRecordRaw = {
   children: [
     {
       path: `/${ROUTE_NAME}/by/:id`,
-      // title n existe dentro do "RouteRecordRaw" por isso passado no Propos
+      // title n existe dentro do "RouteRecordRaw" por isso passado no Props
       props: { title: 'Pókemon por Id' },
       name: 'pokemon-id',
       component: () => import('@/pokemons/views/PokemonById.vue'),
