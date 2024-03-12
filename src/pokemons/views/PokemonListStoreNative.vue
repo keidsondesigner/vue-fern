@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import store from '@/stores/pokemon.store';
+import store from '@/store/pokemon.store';
 import PokemonCardList from '../components/PokemonCardLits.vue';
 
 // Removendo Composable function usePokemons()
@@ -31,4 +31,4 @@ store.startLoadingPokemons();
 
 <style scoped>
 
-</style>
+</style>@/store/pokemon.store
