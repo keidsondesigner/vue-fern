@@ -3,12 +3,15 @@ import NavBar from '@/shared/components/NavBar.vue';
 import  { pokemonRoute } from '@/pokemons/router/index';
 import type { RouterLink } from '@/router/list-routes';
 
-const routeLinks: RouterLink[] = pokemonRoute.children?.map((link) => {
+const routeLinks: RouterLink[] = pokemonRoute.children?.map(({ name, path, props}) => {
+
+  const { title, visible } = props as  { title: string, visible: boolean };
 
   return {
-    name: link.name?.toString() ?? '',
-    path: link.path,
-    title: (link.props as  { title: string }).title,
+    name: name?.toString() ?? '',
+    path: path,
+    title: title,
+    visible: visible
   }
 }) || [];
 

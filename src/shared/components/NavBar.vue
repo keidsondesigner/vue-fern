@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { RouterLink } from "@/router/list-routes";
+import { computed, toRef } from "vue";
 
 interface Props  {
   title?: string;
@@ -8,13 +9,19 @@ interface Props  {
 };
 
 // defineProps<Props>()
-withDefaults(
+const props = withDefaults(
   defineProps<Props>(), {
     title: "Valor padrão",
     navSecondary: false
   }
 
 );
+// posso uso toRef para não perder a 'reatividade' do props
+// const links = toRef(props, "links");
+// posso usar o computed() também
+// filtrar links que estejam visible = 'true'
+const links = computed(() => props.links.filter(link => link.visible));
+
 </script>
 
 <template>
@@ -31,7 +38,7 @@ withDefaults(
     </template>
     <div class="links">
       <RouterLink
-        v-for="link of $props.links"
+        v-for="link of links"
         :key="link.path"
         :to="link.path"
       >
