@@ -1,17 +1,26 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { usePokemon } from '../composables/usePokemon';
+import { useQueryClient } from '@tanstack/vue-query';
 
 
 const route = useRoute();
-
 const { id } = route.params;
 
 const { isLoading, pokemon, isError, erroMessage } = usePokemon(id.toString());
 
+const queryClient = useQueryClient();
+
+// invalidateQueries() permite marcar consultas de forma inteligente como obsoletas e potencialmente recuperá-las também!
+function invalidateQueries() {
+  queryClient.invalidateQueries({ queryKey: ['pokemon', id] });
+}
+
+
 </script>
 
 <template>
+  <button @click="invalidateQueries()">Invalidar Queries</button>
   <!-- <h1>Pokemon ById {{ id }}</h1> -->
   <h1 v-if="isLoading">Loading...</h1>
   <h1 v-else-if="isError">{{ erroMessage }}</h1>
